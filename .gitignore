@@ -1,0 +1,4 @@
+# Igonore Composer
+/vendor/
+composer.lock
+example.php

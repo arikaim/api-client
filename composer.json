@@ -1,0 +1,24 @@
+{
+    "name": "arikaim/api-client",
+    "type": "library",
+    "description": "Arikam CMS Api client",
+    "keywords": ["Arikaim","api-client","client"],
+    "license": "GPL-3.0-or-later",
+    "homepage": "http://arikaim.com",
+    "authors": [{
+        "name": "Konstantin Atanasov",
+        "email": "info@arikaim.com",
+        "homepage": "http://arikaim.com"
+    }],
+    "require": {
+        "php": ">=7.1"            
+    },   
+    "autoload": {       
+        "psr-4": {
+            "Arikaim\\Client\\": ""
+        }
+    },
+    "extra": {
+        "class": "Arikaim\\Client"        
+    }
+}
