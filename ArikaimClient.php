@@ -115,6 +115,54 @@ class ArikaimClient implements ApiClientInterface
     }
 
     /**
+     * POST request
+     *
+     * @param string $path
+     * @param mixed $data
+     * @return mixed
+     */
+    public function post(string $path, $data = null)
+    {
+        return $this->request('POST',$path,$data);
+    }
+
+    /**
+     * PUT request
+     *
+     * @param string $path
+     * @param mixed $data
+     * @return mixed
+     */
+    public function put(string $path, $data = null)
+    {
+        return $this->request('PUT',$path,$data);
+    }
+
+    /**
+     * GET request
+     *
+     * @param string $path
+     * @param mixed $data
+     * @return mixed
+     */
+    public function get(string $path, $data = null)
+    {
+        return $this->request('GET',$path,$data);
+    }
+
+    /**
+     * DELETE request
+     *
+     * @param string $path
+     * @param mixed $data
+     * @return mixed
+     */
+    public function delete(string $path)
+    {
+        return $this->request('DELETE',$path);
+    }
+
+    /**
      * Set verbose level
      *
      * @param integer $level
