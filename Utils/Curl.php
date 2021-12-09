@@ -31,6 +31,13 @@ class Curl
     public static $verbose = false;
 
     /**
+     * Response code
+     *
+     * @var mixed
+     */
+    private static $responseCode = null;
+
+    /**
      * Return true if php curl extension is installed
      *
      * @return boolean
@@ -66,6 +73,16 @@ class Curl
     }
 
     /**
+     * Fet response code
+     *
+     * @return mixed
+     */
+    public static function getResponseCode()
+    {
+        return Self::$responseCode;
+    }
+
+    /**
      * Run curl command
      *
      * @param object $curl
@@ -73,8 +90,11 @@ class Curl
      */
     private static function exec($curl)
     {
+        Self::$responseCode = null;
         $response = \curl_exec($curl);
         $error = ($response === false) ? \curl_error($curl) : null;
+        Self::$responseCode = \curl_getinfo($curl,CURLINFO_HTTP_CODE);
+
         \curl_close($curl);
 
         return (empty($error) == true) ? $response : $error;      
@@ -100,17 +120,15 @@ class Curl
 
         \curl_setopt($curl,CURLOPT_CUSTOMREQUEST,$method);
 
-        if (empty($data) == false) {
-            if (empty($data) == false) {    
-                $data = (\is_array($data) == true) ? json_encode($data) : $data;
-                $curl = Self::setData($curl,$data,$method);        
-                $headers = (\is_array($headers) == true) ? $headers : [];
-                $headers = \array_merge($headers,[              
-                    'Content-Length: ' . \strlen($data)
-                ]);              
-            }
+        if (empty($data) == false) {    
+            $data = (\is_array($data) == true) ? json_encode($data) : $data;
+            $curl = Self::setData($curl,$data,$method);        
+            $headers = (\is_array($headers) == true) ? $headers : [];
+            $headers = \array_merge($headers,[              
+                'Content-Length: ' . \strlen($data)
+            ]);              
         }
-        
+    
         if (\is_array($headers) == true) {
             \curl_setopt($curl,CURLOPT_HTTPHEADER,$headers);
         }
@@ -139,7 +157,7 @@ class Curl
 
         return $curl;
     } 
-    
+
     /**
      * Run POST request
      *

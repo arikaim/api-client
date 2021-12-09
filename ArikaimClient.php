@@ -11,6 +11,8 @@ namespace Arikaim\Client;
 
 use Arikaim\Client\ApiClientInterface;
 use Arikaim\Client\Utils\Curl;
+use Arikaim\Client\Utils\ApiResponse;
+use Arikaim\Client\Utils\HttpStatusCode;
 use Arikaim\Client\Api\Ui;
 
 /**
@@ -110,8 +112,12 @@ class ArikaimClient implements ApiClientInterface
       
         $response = Curl::request($url,$method,$data,$headers);
         $data = \json_decode($response,true);
+        if (\is_array($data) == false) {
+            $responseCode = Curl::getResponseCode();
+            return ApiResponse::createErrorResponse(HttpStatusCode::getMessage($responseCode),$responseCode);
+        }
 
-        return (\is_array($data) == true) ? $data : $response;
+        return ApiResponse::createFromArray($data);
     }
 
     /**
