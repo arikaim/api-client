@@ -114,7 +114,9 @@ class ArikaimClient implements ApiClientInterface
         $data = \json_decode($response,true);
         if (\is_array($data) == false) {
             $responseCode = Curl::getResponseCode();
-            return ApiResponse::createErrorResponse(HttpStatusCode::getMessage($responseCode),$responseCode);
+            $message = HttpStatusCode::getMessage($responseCode) ?? 'Error';
+            
+            return ApiResponse::createErrorResponse($message,$responseCode);
         }
 
         return ApiResponse::createFromArray($data);
