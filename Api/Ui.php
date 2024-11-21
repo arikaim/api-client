@@ -26,7 +26,7 @@ class Ui extends Api
     public function fetchComponent(string $name, $params = null)
     {
         if (\is_array($params) == true) {         
-            $this->client->addHeader('Params',\json_encode($params));
+            $this->client->setHeader('Params',\json_encode($params));
         }
         
         return $this->client->request('GET','core/api/ui/component/' . $name);
@@ -43,7 +43,7 @@ class Ui extends Api
      */
     public function fetchProtectedComponent(string $name, string $extensionName, $params = null, string $method = 'GET')
     {       
-        $params = (\is_array($params) == true) ? $this->client->addHeader('Params',\json_encode($params)) : $params;                  
+        $params = (\is_array($params) == true) ? $this->client->setHeader('Params',\json_encode($params)) : $params;                  
         $path = 'api/' . $extensionName . '/ui/component/' . $name;
 
         return $this->client->request($method,$path,$params);

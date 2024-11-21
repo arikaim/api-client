@@ -9,8 +9,6 @@
 */
 namespace Arikaim\Client\Api;
 
-use Arikaim\Client\ApiClientInterface;
-
 /**
  * Arikaim base api class
  */
@@ -28,7 +26,7 @@ class Api
      *
      * @param ApiClientInterface $client
      */
-    public function __construct(ApiClientInterface $client)
+    public function __construct(object $client)
     {
         $this->client = $client;
     }    

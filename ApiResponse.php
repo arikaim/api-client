@@ -7,7 +7,7 @@
  * @license     http://www.arikaim.com/license
  * 
 */
-namespace Arikaim\Client\Utils;
+namespace Arikaim\Client;
 
 use Psr\Http\Message\ResponseInterface;
 

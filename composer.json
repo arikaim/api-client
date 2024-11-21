@@ -11,14 +11,23 @@
         "homepage": "http://arikaim.com"
     }],
     "require": {
-        "php": ">=7.2",
-        "psr/http-message": "^1.0"            
+        "psr/http-message": "^1.0",
+        "guzzlehttp/guzzle": "^7.9"            
     },   
     "autoload": {       
         "psr-4": {
             "Arikaim\\Client\\": ""
         }
     },
+    "repositories": [
+    {
+        "type": "path",
+        "url": "/httpd/arikaim-client-php",
+        "options": {
+            "symlink": true
+        }
+    }
+],
     "extra": {
         "class": "Arikaim\\Client"        
     }
